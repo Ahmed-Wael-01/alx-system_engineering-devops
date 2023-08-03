@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -maf
+ls -maF
