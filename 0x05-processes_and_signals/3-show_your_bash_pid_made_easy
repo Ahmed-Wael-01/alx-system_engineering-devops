@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#display pids of bashs
+pgrep bash -l
