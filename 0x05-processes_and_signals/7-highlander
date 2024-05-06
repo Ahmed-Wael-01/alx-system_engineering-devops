@@ -1,4 +1,4 @@
-#!/usr/bin/env bah
+#!/usr/bin/env bash
 #a new infinity version
 while true
 do
