@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#shows network statistics
+
+netstat -lp
