@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 # custom 404 page
+sudo apt -y update nginx
+sudo apt -y install nginx
 sudo echo "Ceci n'est pas une page" > /usr/share/nginx/html/error_mssg.html
 sudo sed -i "/listen 80 default_server/a error_page 404 /error_mssg.html;" /etc/nginx/sites-available/default
 sudo service nginx restart
