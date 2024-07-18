@@ -3,6 +3,7 @@
 
 sudo apt -y update
 sudo apt -y install nginx
+sudo ufw allow 'Nginx HTTP'
 echo 'Hello World!' > /var/www/html/index.nginx-debian.html
 sudo sed -i '/listen 80 default_server/a rewrite /redirect_me https://www.wikipedia.com/ permanent;' /etc/nginx/sites-available/default
 sudo servie nginx restart
