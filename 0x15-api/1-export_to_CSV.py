@@ -23,7 +23,7 @@ if __name__ == "__main__":
         with open("{}.csv".format(empl_id), "w", newline="") as csvfile:
             for do in todo_list:
                 csvfile.write('"{}","{}","{}","{}"\n'.format(
-                    do['userId'], user.json()['name'],
+                    do['userId'], user.json()['username'],
                     do['completed'], do['title']))
     except Exception as e:
         print(e)
