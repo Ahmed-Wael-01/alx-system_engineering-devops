@@ -3,32 +3,25 @@
 number of subscribers for a given subreddit
 """
 
-import requests
+from requests import get
 
 
 def number_of_subscribers(subreddit):
-    base_url = 'https://www.reddit.com/'
-    data = {'grant_type': 'password',
-            'username': 'Hot_Seat_8723',
-            'password': '252003ahmed'}
-    auth = requests.auth.HTTPBasicAuth('iCqNlw7qgaMnkYySRxoVkA',
-                                        'k7IeJGPZkGEG2S317NDgKJs4fnm26A')
-    res = requests.post(base_url + 'api/v1/access_token',
-                        data=data,
-                        headers={'user-agent': 'k-fetcher by Hot_Seat_8723'},
-                        auth=auth)
-    dic = res.json()
-    token = 'bearer ' + dic['access_token']
-    base_url = 'https://oauth.reddit.com/'
-    headers = {'Authorization': token,
-                'User-Agent': 'k-fetcher by Hot_Seat_8723'}
-    payload = {'q': subreddit, 'limit': 1, 'sort': 'relevance'}
-    response = requests.get(base_url + '/subreddits/search',
-                            headers=headers,
-                            params=payload)
+    """
+    function that queries the Reddit API and returns the number of subscribers
+    (not active users, total subscribers) for a given subreddit.
+    """
+
+    if subreddit is None or not isinstance(subreddit, str):
+        return 0
+
+    user_agent = {'User-agent': 'Google Chrome Version 81.0.4044.129'}
+    url = 'https://www.reddit.com/r/{}/about.json'.format(subreddit)
+    response = get(url, headers=user_agent)
+    results = response.json()
+
     try:
-        response = response.json().get('data')
-        response = response.get('children')[0].get('data').get('subscribers')
-        return response
-    except Exception as e:
+        return results.get('data').get('subscribers')
+
+    except Exception:
         return 0
